@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update stamp text
             const stamp = currentCoupon.querySelector('.stamp');
-            stamp.textContent = '사용됨';
+            stamp.innerHTML = '사용됨';
             
             // Update button text
             const useBtn = currentCoupon.querySelector('.use-btn');
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Update stamp text
                     const stamp = coupon.querySelector('.stamp');
-                    stamp.textContent = '사용됨';
+                    stamp.innerHTML = '사용됨';
                     
                     // Update button text
                     const useBtn = coupon.querySelector('.use-btn');
