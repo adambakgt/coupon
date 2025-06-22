@@ -101,9 +101,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            // Prevent any parent click events from firing
+            e.stopImmediatePropagation();
+            
             // Set current coupon and show modal
             currentCoupon = coupon;
             modal.style.display = 'block';
+            
+            // Return false to prevent any other handlers from executing
+            return false;
         });
     });
     
@@ -127,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update stamp text
             const stamp = currentCoupon.querySelector('.stamp');
-            stamp.innerHTML = '사용됨';
+            stamp.textContent = '사용됨';
             
             // Update button text
             const useBtn = currentCoupon.querySelector('.use-btn');
@@ -171,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Update stamp text
                     const stamp = coupon.querySelector('.stamp');
-                    stamp.innerHTML = '사용됨';
+                    stamp.textContent = '사용됨';
                     
                     // Update button text
                     const useBtn = coupon.querySelector('.use-btn');
