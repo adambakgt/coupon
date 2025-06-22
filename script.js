@@ -1,4 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 배경음악 설정
+    const bgm = document.getElementById('bgm');
+    const toggleSoundBtn = document.getElementById('toggleSound');
+    const soundIcon = toggleSoundBtn.querySelector('.sound-icon');
+    
+    // 음소거 상태 불러오기
+    const isMuted = localStorage.getItem('bgmMuted') === 'true';
+    
+    // 초기 음소거 상태 설정
+    bgm.muted = isMuted;
+    updateSoundIcon();
+    
+    // 페이지 로드 시 자동 재생 (사용자 상호작용 필요)
+    toggleSoundBtn.addEventListener('click', function() {
+        if (bgm.paused) {
+            bgm.play();
+            bgm.muted = false;
+            localStorage.setItem('bgmMuted', 'false');
+        } else {
+            bgm.muted = !bgm.muted;
+            localStorage.setItem('bgmMuted', bgm.muted.toString());
+        }
+        updateSoundIcon();
+    });
+    
+    // 사용자 상호작용 후 음악 재생 시도
+    document.addEventListener('click', function() {
+        if (bgm.paused && !bgm.muted) {
+            bgm.play().catch(error => {
+                console.log('자동 재생이 차단되었습니다:', error);
+            });
+        }
+    }, { once: true });
+    
+    // 음소거 아이콘 업데이트 함수
+    function updateSoundIcon() {
+        if (bgm.muted) {
+            soundIcon.textContent = 'volume_off';
+        } else {
+            soundIcon.textContent = 'volume_up';
+        }
+    }
     // Load saved coupon states from localStorage
     loadCouponStates();
     
@@ -181,4 +223,21 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
         return colors[Math.floor(Math.random() * colors.length)];
     }
+    
+    // 페이지 가시성 변경 시 음악 제어
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            // 페이지가 보이지 않을 때 음악 일시 정지
+            if (!bgm.paused && !bgm.muted) {
+                bgm.pause();
+                bgm.dataset.wasPlaying = 'true';
+            }
+        } else {
+            // 페이지가 다시 보일 때 음악 재생 (이전에 재생 중이었다면)
+            if (bgm.dataset.wasPlaying === 'true' && !bgm.muted) {
+                bgm.play().catch(e => console.log('재생 실패:', e));
+                bgm.dataset.wasPlaying = 'false';
+            }
+        }
+    });
 });

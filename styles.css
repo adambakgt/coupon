@@ -267,6 +267,38 @@ footer {
     background-color: #dee2e6;
 }
 
+/* Sound Control */
+.sound-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.sound-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.sound-btn:hover {
+    background-color: #bc6c25;
+    transform: scale(1.05);
+}
+
+.sound-icon {
+    color: white;
+    font-size: 24px;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
