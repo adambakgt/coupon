@@ -33,6 +33,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 3rem;
+    -webkit-animation: fadeIn 1s ease-in-out;
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -64,6 +65,7 @@ h1 {
 
 .summer-icon {
     font-size: 2rem;
+    -webkit-animation: sway 3s infinite ease-in-out alternate;
     animation: sway 3s infinite ease-in-out alternate;
 }
 
@@ -75,11 +77,24 @@ h1 {
     animation-delay: 1s;
 }
 
-@keyframes sway {
+@-webkit-keyframes sway {
     0% {
+        -webkit-transform: translateY(0) rotate(-5deg);
         transform: translateY(0) rotate(-5deg);
     }
     100% {
+        -webkit-transform: translateY(-10px) rotate(5deg);
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+@keyframes sway {
+    0% {
+        -webkit-transform: translateY(0) rotate(-5deg);
+        transform: translateY(0) rotate(-5deg);
+    }
+    100% {
+        -webkit-transform: translateY(-10px) rotate(5deg);
         transform: translateY(-10px) rotate(5deg);
     }
 }
@@ -93,8 +108,10 @@ h1 {
 
 .coupon {
     perspective: 1000px;
+    -webkit-perspective: 1000px;
     height: 300px;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
 }
 
 .coupon-inner {
@@ -102,14 +119,18 @@ h1 {
     width: 100%;
     height: 100%;
     transition: transform 0.8s;
+    -webkit-transition: -webkit-transform 0.8s;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transform-origin: center center;
+    -webkit-transform-origin: center center;
 }
 
 .coupon.flipped .coupon-inner {
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 .coupon-front, .coupon-back {
@@ -119,6 +140,7 @@ h1 {
     top: 0;
     left: 0;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     padding: 2rem;
@@ -142,6 +164,7 @@ h1 {
     background-color: white;
     color: var(--text-color);
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 .icon {
@@ -188,6 +211,7 @@ h1 {
 .use-btn:hover {
     background-color: #bc6c25;
     transform: translateY(-3px);
+    -webkit-transform: translateY(-3px);
 }
 
 .used .use-btn {
@@ -249,6 +273,7 @@ footer {
     border-radius: var(--border-radius);
     max-width: 500px;
     text-align: center;
+    -webkit-animation: slideIn 0.3s ease-out;
     animation: slideIn 0.3s ease-out;
 }
 
@@ -332,13 +357,41 @@ footer {
 }
 
 /* Animations */
-@keyframes fadeIn {
+@-webkit-keyframes fadeIn {
     from {
         opacity: 0;
+        -webkit-transform: translateY(-20px);
         transform: translateY(-20px);
     }
     to {
         opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes slideIn {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(-50px);
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
         transform: translateY(0);
     }
 }
@@ -346,10 +399,12 @@ footer {
 @keyframes slideIn {
     from {
         opacity: 0;
+        -webkit-transform: translateY(-50px);
         transform: translateY(-50px);
     }
     to {
         opacity: 1;
+        -webkit-transform: translateY(0);
         transform: translateY(0);
     }
 }

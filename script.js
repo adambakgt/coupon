@@ -107,11 +107,38 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set current coupon and show modal
             currentCoupon = coupon;
             modal.style.display = 'block';
-            
-            // Return false to prevent any other handlers from executing
-            return false;
         });
     });
+    
+    // 모든 버튼 이벤트 다시 바인딩
+    function rebindButtonEvents() {
+        document.querySelectorAll('.use-btn').forEach(button => {
+            // 기존 이벤트 리스너 제거
+            button.replaceWith(button.cloneNode(true));
+        });
+        
+        // 새로운 이벤트 리스너 추가
+        document.querySelectorAll('.use-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                
+                const coupon = this.closest('.coupon');
+                
+                if (coupon.classList.contains('used')) {
+                    return;
+                }
+                
+                e.stopImmediatePropagation();
+                
+                currentCoupon = coupon;
+                modal.style.display = 'block';
+            });
+        });
+    }
+    
+    // 페이지 로드 후 이벤트 바인딩
+    setTimeout(rebindButtonEvents, 500);
     
     // Close modal when clicking X
     closeBtn.addEventListener('click', function() {
