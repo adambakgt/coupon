@@ -149,6 +149,9 @@ h1 {
     justify-content: center;
     align-items: center;
     text-align: center;
+    /* 사파리 브라우저 호환성 개선 */
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 .coupon-front {
@@ -165,6 +168,8 @@ h1 {
     color: var(--text-color);
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg);
+    /* 사파리에서 앞면이 비치는 문제 해결 */
+    z-index: 1;
 }
 
 .icon {
@@ -234,6 +239,12 @@ h1 {
     mix-blend-mode: overlay;
     z-index: 1;
     border-radius: var(--border-radius);
+}
+
+/* 뒤집힌 상태에서는 이미지 숨기기 */
+.coupon.flipped .coupon-image {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .coupon-front h2, .coupon-front p {
