@@ -11,6 +11,26 @@ document.addEventListener('DOMContentLoaded', function() {
     bgm.muted = isMuted;
     updateSoundIcon();
     
+    // 페이지 로드 시 자동 재생 시도
+    try {
+        // 자동 재생 시도
+        const playPromise = bgm.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log('자동 재생이 차단되었습니다. 사용자 상호작용이 필요합니다:', error);
+                // 자동 재생이 실패한 경우 첫 클릭 시 재생 시도
+                document.addEventListener('click', function() {
+                    if (bgm.paused && !bgm.muted) {
+                        bgm.play().catch(e => console.log('재생 실패:', e));
+                    }
+                }, { once: true });
+            });
+        }
+    } catch (error) {
+        console.log('자동 재생 오류:', error);
+    }
+    
     // 페이지 로드 시 자동 재생 (사용자 상호작용 필요)
     toggleSoundBtn.addEventListener('click', function() {
         if (bgm.paused) {
@@ -24,14 +44,15 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSoundIcon();
     });
     
-    // 사용자 상호작용 후 음악 재생 시도
-    document.addEventListener('click', function() {
+    // 음악 재생 상태 확인 및 필요시 재시도
+    setTimeout(() => {
         if (bgm.paused && !bgm.muted) {
+            console.log('음악이 재생되지 않았습니다. 재시도합니다.');
             bgm.play().catch(error => {
                 console.log('자동 재생이 차단되었습니다:', error);
             });
         }
-    }, { once: true });
+    }, 1000);
     
     // 음소거 아이콘 업데이트 함수
     function updateSoundIcon() {

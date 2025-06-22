@@ -270,18 +270,24 @@ footer {
 /* Sound Control */
 .sound-control {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px;
+    right: 15px;
     z-index: 1000;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.sound-control:hover {
+    opacity: 1;
 }
 
 .sound-btn {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: var(--accent-color);
+    background-color: rgba(40, 54, 24, 0.7);
     border: none;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -290,13 +296,12 @@ footer {
 }
 
 .sound-btn:hover {
-    background-color: #bc6c25;
-    transform: scale(1.05);
+    background-color: rgba(96, 108, 56, 0.8);
 }
 
 .sound-icon {
-    color: white;
-    font-size: 24px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
 }
 
 /* Animations */
