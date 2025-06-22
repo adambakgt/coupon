@@ -11,10 +11,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let currentCoupon = null;
     
-    // Add click event to use buttons
+    // Add click/tap event to flip coupons
+    coupons.forEach(coupon => {
+        coupon.addEventListener('click', function(e) {
+            // Don't flip if clicking on the use button
+            if (e.target.classList.contains('use-btn') || 
+                e.target.closest('.use-btn')) {
+                return;
+            }
+            
+            // Toggle flipped class
+            this.classList.toggle('flipped');
+        });
+    });
+    
+    // Add click/tap event to use buttons
     document.querySelectorAll('.use-btn').forEach(button => {
         button.addEventListener('click', function(e) {
             e.stopPropagation(); // Prevent coupon flip
+            e.preventDefault(); // Prevent default behavior
             
             const coupon = this.closest('.coupon');
             
@@ -161,8 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to get random color
     function getRandomColor() {
         const colors = [
-            '#ff6b6b', '#f06595', '#cc5de8', '#5c7cfa', '#339af0',
-            '#51cf66', '#fcc419', '#ff922b'
+            '#606c38', '#283618', '#dda15e', '#bc6c25', '#588157',
+            '#a3b18a', '#e9edc9', '#faedcd'
         ];
         return colors[Math.floor(Math.random() * colors.length)];
     }
