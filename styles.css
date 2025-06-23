@@ -197,9 +197,6 @@ h1 {
     color: white;
 }
 
-.used .stamp::after {
-    content: "사용됨";
-}
 
 .use-btn {
     margin-top: 1rem;
@@ -224,9 +221,6 @@ h1 {
     cursor: not-allowed;
 }
 
-.used .use-btn::after {
-    content: "사용됨";
-}
 
 .coupon-image {
     position: absolute;
